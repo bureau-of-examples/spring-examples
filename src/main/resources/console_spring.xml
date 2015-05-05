@@ -4,32 +4,55 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="special/special_spring.xml" />
+    <import resource="special/special_spring.xml"/>
+
+
 
     <bean id="helloMessage" class="zhy2002.springexamples.MessageHolder">
-        <property name="message" value="Hello earthlings!" />
+        <property name="message" value="Hello earthlings!"/>
     </bean>
 
     <bean id="helloPrinter" class="zhy2002.springexamples.MessagePrinter">
-        <constructor-arg ref="helloMessage" />
+        <constructor-arg index="0" ref="helloMessage"/>
+        <constructor-arg index="1">
+            <null/>
+        </constructor-arg>
     </bean>
 
-    <bean id="specialPrinter" class="zhy2002.springexamples.MessagePrinter" >
-        <constructor-arg ref="specialMessage" />
+    <bean id="timeBean" class="zhy2002.springexamples.TimeBean" scope="prototype" />
+
+    <bean id="specialPrinter" class="zhy2002.springexamples.MessagePrinter" autowire="constructor">
+        <constructor-arg index="0" ref="specialMessage"/>
     </bean>
 
 
-    <bean id="specialMessage" class="zhy2002.springexamples.MessageHolder" >
-        <property name="message" value="Console Special Message." />
+    <bean id="specialMessage" class="zhy2002.springexamples.MessageHolder" autowire="byName">
+
+        <property name="message" value="Console Special Message."/>
+        <property name="prefix" value="${jdbc.url}: "/>
     </bean>
+
+    <bean id="dateCreated" class="java.util.Date">
+        <constructor-arg index="0" value="1999"/>
+        <constructor-arg index="1" value="12"/>
+        <constructor-arg index="2" value="31"/>
+    </bean>
+
+    <bean class="zhy2002.springexamples.MessageFormatter"/>
+
+    <alias name="specialMessage" alias="specialMessage1"/>
 
     <bean id="messageBoard" class="zhy2002.springexamples.MessageBoard">
         <constructor-arg>
             <list>
-               <ref bean="helloPrinter" />
-               <ref bean="specialPrinter" />
+                <ref bean="helloPrinter"/>
+                <ref bean="specialPrinter"/>
             </list>
         </constructor-arg>
+        <property name="boardName">
+            <idref bean="specialMessage1"/>
+        </property>
+        <lookup-method name="now" bean="timeBean"/>
     </bean>
 
 </beans>

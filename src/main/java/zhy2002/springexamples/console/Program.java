@@ -1,11 +1,14 @@
 package zhy2002.springexamples.console;
 
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import zhy2002.springexamples.MessageBoard;
 import zhy2002.springexamples.MessageHolder;
 import zhy2002.springexamples.MessagePrinter;
+
+import java.util.Properties;
 
 public class Program {
 
@@ -18,6 +21,10 @@ public class Program {
 
         MessageBoard messageBoard = applicationContext.getBean("messageBoard", MessageBoard.class);
         messageBoard.print();
+
+        PropertyPlaceholderConfigurer properties = (PropertyPlaceholderConfigurer)applicationContext.getBean("myProperties");
+        System.out.println(properties.getClass().toString());
+
 
     }
 }
