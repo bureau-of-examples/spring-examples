@@ -1,10 +1,9 @@
-package zhy2002.springexamples.databinding;
+package zhy2002.springexamples.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import zhy2002.springexamples.domain.Product;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.ShoppingCartItem;
 

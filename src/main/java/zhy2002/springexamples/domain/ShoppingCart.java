@@ -1,6 +1,7 @@
 package zhy2002.springexamples.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,6 +9,7 @@ import java.util.List;
  */
 public class ShoppingCart {
 
+    private Date dateCreated;
     private Customer customer;
     private List<ShoppingCartItem> items = new ArrayList<>();
 
@@ -25,5 +27,13 @@ public class ShoppingCart {
 
     public void setItems(List<ShoppingCartItem> items) {
         this.items = items;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

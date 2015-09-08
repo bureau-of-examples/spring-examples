@@ -1,17 +1,12 @@
-package zhy2002.springexamples.databinding;
+package zhy2002.springexamples.validation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.testng.annotations.Test;
-import zhy2002.springexamples.EmptyStringConfig;
 import zhy2002.springexamples.domain.Customer;
 
 import static org.hamcrest.MatcherAssert.*;

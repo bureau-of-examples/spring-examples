@@ -7,6 +7,7 @@ public class Customer {
     private Long id;
     private String firstName;
     private String lastName;
+    private Boolean vip;
 
     public Long getId() {
         return id;
@@ -30,5 +31,13 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Boolean getVip() {
+        return vip;
+    }
+
+    public void setVip(Boolean vip) {
+        this.vip = vip;
     }
 }

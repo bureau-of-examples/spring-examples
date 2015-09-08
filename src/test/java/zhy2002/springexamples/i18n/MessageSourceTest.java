@@ -1,10 +1,10 @@
-package zhy2002.springexamples.testing;
+package zhy2002.springexamples.i18n;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.DelegatingMessageSource;
 import org.testng.annotations.Test;
-import zhy2002.springexamples.EmptyStringConfig;
+import zhy2002.springexamples.common.EmptyStringConfig;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

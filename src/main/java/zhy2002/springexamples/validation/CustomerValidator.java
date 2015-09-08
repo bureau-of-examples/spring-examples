@@ -1,4 +1,4 @@
-package zhy2002.springexamples.databinding;
+package zhy2002.springexamples.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
