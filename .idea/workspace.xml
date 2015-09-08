@@ -2,77 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="246e5602-662d-4637-be26-c3b877c281a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/web/AsyncDispatchServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/web/AsyncDispatchTargetServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/web/AsyncServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/databinding/BindingTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/CacheTestBean.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/algorithm/Combinator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/testing/CombinatorTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/domain/Customer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/dao/CustomerService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/dao/impl/CustomerServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/testing/CustomerServiceImplTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/databinding/CustomerValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/databinding/DataBindingConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/EmptyStringConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/algorithm/FindMaxInRange.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/aop/FirstAspect.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/web/ForwardingServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/algorithm/MaxFinder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/testing/MaxFinderTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/testing/MessageSourceTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/zhy2002/springexamples/testing/MockObjectsTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/Person.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/domain/Product.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/domain/ShoppingCart.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/domain/ShoppingCartItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/databinding/ShoppingCartValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/web/TimeServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/domain/User.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/algorithm/VisitListCallback.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/spring-test-config.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/test1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/views/test1view.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/databinding/validationMessages.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/databinding/validationMessages2.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/web_spring.xml" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__ch_qos_logback_logback_classic_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__ch_qos_logback_logback_core_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_slf4j_jcl_over_slf4j_1_7_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_slf4j_slf4j_api_1_7_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_aop_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_beans_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_context_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_core_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_expression_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\libraries\Maven__org_springframework_spring_web_4_1_6_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\.idea\uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\spring-examples.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\console_spring.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\logback.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\special\special_spring.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\zhy2002\springexamples\MessageBoard.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\zhy2002\springexamples\MessageHolder.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\zhy2002\springexamples\MessagePrinter.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\classes\zhy2002\springexamples\console\Program.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\maven-archiver\pom.properties" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="C:\zhy\dev\git_repos\spring-examples\target\spring-examples-1.0-SNAPSHOT.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/console/Program.java" afterPath="$PROJECT_DIR$/src/main/java/zhy2002/springexamples/console/Program.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/console_spring.xml" afterPath="$PROJECT_DIR$/src/main/resources/console_spring.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="spring-examples.iws" />
@@ -287,12 +217,25 @@
       <created>1441709883628</created>
       <option name="number" value="Default" />
       <updated>1441709883628</updated>
-      <workItem from="1441709887743" duration="103000" />
+      <workItem from="1441709887743" duration="357000" />
     </task>
+    <task id="LOCAL-00001" summary="restructuring the files.">
+      <created>1441710188358</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1441710188358</updated>
+    </task>
+    <task id="LOCAL-00002" summary="restructuring the files.">
+      <created>1441710240751</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1441710240751</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103000" />
+    <option name="totallyTimeSpent" value="357000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -300,6 +243,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -327,6 +271,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="restructuring the files." />
+    <option name="LAST_COMMIT_MESSAGE" value="restructuring the files." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
