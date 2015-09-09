@@ -4,7 +4,6 @@ import com.sun.beans.editors.ColorEditor;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.ConversionNotSupportedException;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 import zhy2002.springexamples.common.PropertyTestObject;
@@ -179,8 +178,8 @@ public class BeanWrapperTest {
         assertThat(defaultBeanInfo, notNullValue());
         assertThat(defaultBeanInfo, notNullValue());
         assertThat(defaultBeanInfo, not(sameInstance(definedBeanInfo)));
-        assertThat(definedBeanInfo.getPropertyDescriptors().length, equalTo(1));
-        assertThat(defaultBeanInfo.getPropertyDescriptors().length, greaterThan(1));
+        assertThat(definedBeanInfo.getPropertyDescriptors().length, equalTo(2));
+        assertThat(defaultBeanInfo.getPropertyDescriptors().length, greaterThanOrEqualTo(2));
         assertThat(definedBeanInfo.getPropertyDescriptors()[0].createPropertyEditor(new Customer()), instanceOf(ShoppingCartCustomerEditor.class));
     }
 
