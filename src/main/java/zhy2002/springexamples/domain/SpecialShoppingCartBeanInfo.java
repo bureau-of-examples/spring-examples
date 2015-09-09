@@ -1,6 +1,7 @@
 package zhy2002.springexamples.domain;
 
 import java.beans.*;
+import java.util.Date;
 
 /**
  * BeanInfo class for ShoppingCart class.
@@ -11,14 +12,22 @@ public class SpecialShoppingCartBeanInfo extends SimpleBeanInfo {
 
     static {
         try {
-            PropertyDescriptor propertyDescriptor = new PropertyDescriptor("customer", ShoppingCart.class){
+            PropertyDescriptor customerDescriptor = new PropertyDescriptor("customer", SpecialShoppingCart.class){
                 @Override
                 public PropertyEditor createPropertyEditor(Object bean) {
                     return new ShoppingCartCustomerEditor((Customer)bean);
                 }
             };
 
-            PROPERTY_DESCRIPTORS = new PropertyDescriptor[]{propertyDescriptor};
+            PropertyDescriptor dateCreatedDescriptor = new PropertyDescriptor("dateCreated", SpecialShoppingCart.class){
+
+                @Override
+                public PropertyEditor createPropertyEditor(Object bean) {
+                    return new DefaultDateEditor((Date)bean);
+                }
+            };
+
+            PROPERTY_DESCRIPTORS = new PropertyDescriptor[]{dateCreatedDescriptor, customerDescriptor};
         }catch (IntrospectionException ex){
             throw new RuntimeException(ex);
         }

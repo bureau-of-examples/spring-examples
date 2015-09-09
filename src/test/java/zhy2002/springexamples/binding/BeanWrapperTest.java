@@ -3,6 +3,9 @@ package zhy2002.springexamples.binding;
 import com.sun.beans.editors.ColorEditor;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.ConversionNotSupportedException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.*;
@@ -11,7 +14,6 @@ import java.awt.*;
 import java.beans.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -250,9 +252,68 @@ public class BeanWrapperTest {
 
     }
 
-    //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        System.out.println(simpleDateFormat.format(new Date()));
-//
-//        Date date = simpleDateFormat.parse("2011-02-14");
 
+    @Test(expectedExceptions = ConversionNotSupportedException.class)
+    public void beanWrapperDoesNotLookAtBeanInfoPropertyEditor(){
+
+        //arrange
+        BeanWrapper wrapper = createBeanWrapper(SpecialShoppingCart.class);
+        //wrapper.registerCustomEditor(Date.class, new DefaultDateEditor()); //uncomment this line will make the action work but the editor is already hook into the bean info property descriptor.
+
+        //action
+        wrapper.setPropertyValue("dateCreated", "2013-04-14");
+    }
+
+    @Test
+    public void canRegisterCustomEditor(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beanwrappertest/registerCustomEditor.xml");
+        applicationContext.getBeanFactory().registerCustomEditor(Customer.class, ShoppingCartCustomerEditor.class);
+
+        //action
+        ShoppingCart shoppingCart = applicationContext.getBean(ShoppingCart.class); //this bean has to be lazyInit=true
+
+        //assertion
+        assertThat(shoppingCart, notNullValue());
+        assertThat(shoppingCart.getCustomer(), notNullValue());
+        assertThat(shoppingCart.getCustomer().getId(), equalTo(32L));
+        assertThat(shoppingCart.getCustomer().getFirstName(), equalTo("Tony"));
+        assertThat(shoppingCart.getCustomer().getLastName(), equalTo("Stark"));
+    }
+
+    @Test
+    public void canUseCustomEditorConfigurer(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beanwrappertest/canUseCustomEditorConfigurer.xml");
+
+        //action
+        ShoppingCart shoppingCart = applicationContext.getBean(ShoppingCart.class); //this has lazyInit=false
+
+        //assertion
+        assertThat(shoppingCart, notNullValue());
+        assertThat(shoppingCart.getCustomer(), notNullValue());
+        assertThat(shoppingCart.getCustomer().getId(), equalTo(32L));
+        assertThat(shoppingCart.getCustomer().getFirstName(), equalTo("Tony"));
+        assertThat(shoppingCart.getCustomer().getLastName(), equalTo("Stark"));
+
+    }
+
+    @Test
+    public void canUsePropertyEditorRegistrar(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beanwrappertest/canUsePropertyEditorRegistrar.xml");
+
+        //action
+        ShoppingCart shoppingCart = applicationContext.getBean(ShoppingCart.class); //this has lazyInit=false
+
+        //assertion
+        assertThat(shoppingCart, notNullValue());
+        assertThat(shoppingCart.getCustomer(), notNullValue());
+        assertThat(shoppingCart.getCustomer().getId(), equalTo(32L));
+        assertThat(shoppingCart.getCustomer().getFirstName(), equalTo("Tony"));
+        assertThat(shoppingCart.getCustomer().getLastName(), equalTo("Stark"));
+
+    }
 }
