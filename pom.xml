@@ -19,6 +19,15 @@
 
     <dependencies>
 
+        <!--This is to allow us to peep into the sun-jre specific classes.-->
+        <dependency>
+            <groupId>zhy2002</groupId>
+            <artifactId>sun-jre</artifactId>
+            <version>1.8</version>
+            <scope>system</scope>
+            <systemPath>${java.home}/lib/rt.jar</systemPath>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -151,6 +160,10 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <compilerArgs>
+                        <arg>-XDignore.symbol.file</arg>
+                    </compilerArgs>
+                    <fork>true</fork>
                 </configuration>
             </plugin>
 
