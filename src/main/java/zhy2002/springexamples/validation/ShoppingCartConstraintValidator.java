@@ -45,4 +45,5 @@ public class ShoppingCartConstraintValidator implements ConstraintValidator<Shop
 
         return true;
     }
+
 }
