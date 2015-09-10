@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+           <map>
+               <entry key="zhy2002.springexamples.domain.Customer" value="zhy2002.springexamples.domain.ShoppingCartCustomerEditor" />
+           </map>
+        </property>
+    </bean>
+
+    <bean id="customer" class="zhy2002.springexamples.domain.Customer">
+        <property name="id" value="99" />
+        <property name="firstName" value="Eric" />
+        <property name="lastName" value="Cartman" />
+    </bean>
+
+    <bean id="orderDetails" class="zhy2002.springexamples.dto.OrderDetails">
+        <property name="customer" ref="customer" />
+    </bean>
+
+    <bean id="shoppingCart" class="zhy2002.springexamples.domain.ShoppingCart">
+        <property name="customer" value="1,Stan,Marsh" />
+    </bean>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" >
+        <property name="formatters">
+           <set>
+               <bean class="zhy2002.springexamples.conversion.CustomerFormatter" />
+           </set>
+        </property>
+    </bean>
+</beans>

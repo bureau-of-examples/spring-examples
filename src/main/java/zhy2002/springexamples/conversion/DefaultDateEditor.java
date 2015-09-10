@@ -1,4 +1,4 @@
-package zhy2002.springexamples.domain;
+package zhy2002.springexamples.conversion;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class DefaultDateEditor extends PropertyEditorSupport {
         if (parts.length != 3)
             throw new IllegalArgumentException();
 
-        GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+        GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]) - 1, Integer.parseInt(parts[2]));
         Date value = calendar.getTime();
         setValue(value);
     }

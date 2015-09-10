@@ -11,7 +11,11 @@ import zhy2002.springexamples.common.EmptyStringConfig;
 import zhy2002.springexamples.domain.Product;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.ShoppingCartItem;
+import zhy2002.springexamples.dto.CustomerTransactionDetails;
+import zhy2002.springexamples.dto.OrderDetails;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -109,6 +113,66 @@ public class ConversionTest {
         assertThat(cart, notNullValue());
         assertThat(cart.getItems(), hasSize(1));
         assertThat(cart.getItems().get(0).getProduct(), sameInstance(product));
+    }
+
+    @Test
+    public void editorTakesPrecedenceWhenConvertingFromString(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/formatterWithConversionServiceFactory.xml");
+
+        //action
+        ShoppingCart cart = applicationContext.getBean(ShoppingCart.class);
+
+        //assertion
+        assertThat(cart, notNullValue());
+        assertThat(cart.getCustomer(), notNullValue());
+        assertThat(cart.getCustomer().getId(), equalTo(1L));
+        assertThat(cart.getCustomer().getFirstName(), equalTo("Stan"));
+        assertThat(cart.getCustomer().getLastName(), equalTo("Marsh"));
+    }
+
+    @Test
+    public void formatterTakesPrecedenceWehnConvertingToString(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/formatterWithConversionServiceFactory.xml");
+
+        //action
+        OrderDetails orderDetails = applicationContext.getBean(OrderDetails.class);
+
+        //assertion
+        assertThat(orderDetails.getCustomer(), equalTo("[99 - Eric Cartman]"));
+    }
+
+    @Test
+    public void editorIsUsedWhenCoerceBeanPropertyValue(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/annotationFormatter.xml");
+
+        //action
+        CustomerTransactionDetails customerTransactionDetails = applicationContext.getBean(CustomerTransactionDetails.class);
+
+        //assertion
+        assertThat(customerTransactionDetails.getCustomer(), notNullValue());
+        assertThat(customerTransactionDetails.getCustomer().getId(), nullValue());
+        assertThat(customerTransactionDetails.getCustomer().getFirstName(), equalTo("32"));
+        assertThat(customerTransactionDetails.getCustomer().getLastName(), equalTo("- Elvis Presley"));
+    }
+
+    @Test
+    public void canChangeDefaultDateParsingWithCustomEditorConfigurer() throws ParseException{
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/globalDateFormat.xml");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        //action
+        OrderDetails orderDetails = applicationContext.getBean(OrderDetails.class);
+
+        //assertion
+        assertThat(orderDetails.getOrderDate(), equalTo(dateFormat.parse("2013-12-05")));
 
     }
 }

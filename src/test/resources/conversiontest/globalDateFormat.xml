@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="java.util.Date" value="zhy2002.springexamples.conversion.DefaultDateEditor" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="orderDetails" class="zhy2002.springexamples.dto.OrderDetails">
+        <property name="orderDate" value="2013-12-05" />
+    </bean>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" >
+        <property name="registerDefaultFormatters" value="true" />
+
+    </bean>
+</beans>

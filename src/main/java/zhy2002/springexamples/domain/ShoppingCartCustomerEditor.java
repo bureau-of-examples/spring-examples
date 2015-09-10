@@ -35,4 +35,11 @@ public class ShoppingCartCustomerEditor extends PropertyEditorSupport{
 
         setValue(customer);
     }
+
+    @Override
+    public String getAsText() {
+
+        Customer customer = (Customer)getSource();
+        return String.format("%d,%s,%s", customer.getId(), customer.getFirstName(), customer.getLastName());
+    }
 }
