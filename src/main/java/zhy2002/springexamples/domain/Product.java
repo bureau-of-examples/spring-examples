@@ -1,5 +1,6 @@
 package zhy2002.springexamples.domain;
 
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
 /**
@@ -9,8 +10,11 @@ public class Product {
 
     private Long id;
     private String name;
+
+    @DecimalMin(value = "0", inclusive = false)
     private BigDecimal price;
     private String unitType;
+    private BigDecimal stock;
 
     public Product(){
     }
@@ -50,5 +54,13 @@ public class Product {
 
     public void setUnitType(String unitType) {
         this.unitType = unitType;
+    }
+
+    public BigDecimal getStock() {
+        return stock;
+    }
+
+    public void setStock(BigDecimal stock) {
+        this.stock = stock;
     }
 }

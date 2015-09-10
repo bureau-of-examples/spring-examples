@@ -1,12 +1,15 @@
 package zhy2002.springexamples.domain;
 
+import zhy2002.springexamples.validation.ShoppingCartConstraint;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- *
+ *  A shopping cart.
  */
+@ShoppingCartConstraint
 public class ShoppingCart {
 
     public ShoppingCart(){

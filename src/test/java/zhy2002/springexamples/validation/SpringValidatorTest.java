@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.*;
 
 
 @ContextConfiguration(classes = {DataBindingConfig.class})
-public class BindingTest extends AbstractTestNGSpringContextTests {
+public class SpringValidatorTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private CustomerValidator customerValidator;
@@ -57,12 +57,6 @@ public class BindingTest extends AbstractTestNGSpringContextTests {
         //assertion
         assertThat(errors.getErrorCount(), equalTo(0));
     }
-
-    @Test
-    public void nestedValidatorShouldBeAutowired(){
-
-    }
-
 
 
 }

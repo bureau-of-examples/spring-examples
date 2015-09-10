@@ -83,6 +83,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j-version}</version>
@@ -124,17 +131,27 @@
             <version>1.8.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.8.4</version>
-        </dependency>
 
         <dependency>
             <groupId>xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.2.2</version>
         </dependency>
+
+        <!--If you use Bean Validaiton then Spring needs a Bean Validation Provider-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
+
+        <!--EL implementation used by Hibernate Bean Validation-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
 
     </dependencies>
 
