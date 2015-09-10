@@ -3,7 +3,7 @@ package zhy2002.springexamples.domain;
 import java.math.BigDecimal;
 
 /**
- * Created by JOHNZ on 11/05/2015.
+ * An example domain class for testing.
  */
 public class Product {
 
@@ -11,6 +11,13 @@ public class Product {
     private String name;
     private BigDecimal price;
     private String unitType;
+
+    public Product(){
+    }
+
+    public Product(String name){
+        this.name = name;
+    }
 
 
     public Long getId() {

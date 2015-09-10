@@ -9,6 +9,10 @@ import java.util.List;
  */
 public class ShoppingCart {
 
+    public ShoppingCart(){
+       System.out.println("Creating cart...");
+    }
+
     private Date dateCreated;
     private Customer customer;
     private List<ShoppingCartItem> items = new ArrayList<>();

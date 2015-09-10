@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="conversionService" class="org.springframework.core.convert.support.DefaultConversionService" >
+
+    </bean>
+
+    <bean class="zhy2002.springexamples.common.ConfigurableConversionServiceInitializer">
+        <constructor-arg ref="conversionService" />
+        <property name="converters">
+            <list>
+                <bean class="zhy2002.springexamples.conversion.ProductCartItemConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+           <map>
+               <entry key="zhy2002.springexamples.domain.Customer" value="zhy2002.springexamples.domain.ShoppingCartCustomerEditor" />
+           </map>
+        </property>
+    </bean>
+
+    <bean id="product" class="zhy2002.springexamples.domain.Product" >
+        <property name="name" value="Toyota Corolla" />
+    </bean>
+
+    <bean id="shoppingCart" class="zhy2002.springexamples.domain.ShoppingCart" lazy-init="true">
+        <property name="customer" value="32,Tony,Stark"/>
+        <property name="items">
+            <list>
+                <ref bean="product" />
+            </list>
+        </property>
+    </bean>
+
+</beans>
