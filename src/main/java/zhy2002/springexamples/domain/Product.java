@@ -11,7 +11,7 @@ public class Product {
     private Long id;
     private String name;
 
-    @DecimalMin(value = "0", inclusive = false)
+    @DecimalMin(value = "0", inclusive = false, message = "Price cannot be lower than {min}.")
     private BigDecimal price;
     private String unitType;
     private BigDecimal stock;
