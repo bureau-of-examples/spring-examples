@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="parentBean" abstract="true" class="zhy2002.springexamples.common.PropertyTestObject" >
+        <property name="integers">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>100</value>
+            </list>
+        </property>
+
+        <property name="configProperties">
+            <!--Cannot use value tag for merging-->
+            <props>
+                <prop key="key1" >value1</prop>
+                <prop key="key2" >value2</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="childBean" class="zhy2002.springexamples.common.PropertyTestObject" parent="parentBean" >
+        <property name="integers">
+            <list merge="true" value-type="java.lang.Integer">
+                <value>5</value>
+            </list>
+        </property>
+
+        <property name="configProperties">
+            <props merge="true">
+                <prop key="key1" >value1+</prop>
+                <prop key="key3">value3</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

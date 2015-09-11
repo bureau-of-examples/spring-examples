@@ -12,6 +12,12 @@ public class User {
     private Customer customer;
     private ShoppingCart shoppingCart;
 
+    public User(){}
+
+    public User(Customer customer){
+        this.customer = customer;
+    }
+
     public String getSessionId() {
         return sessionId;
     }

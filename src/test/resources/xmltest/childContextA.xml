@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="myCustomer" class="zhy2002.springexamples.domain.Customer">
+        <property name="lastName" value="Customer In Child Context" />
+     </bean>
+
+    <bean id="cartOfParentCustomer" class="zhy2002.springexamples.domain.ShoppingCart">
+        <property name="customer" >
+            <ref parent="myCustomer" />
+        </property>
+    </bean>
+
+    <bean id="cartOfChildCustomer" class="zhy2002.springexamples.domain.ShoppingCart">
+        <property name="customer" >
+            <ref bean="myCustomer" />
+        </property>
+    </bean>
+
+    <bean id="cartOfNewCustomer" class="zhy2002.springexamples.domain.ShoppingCart">
+        <property name="customer" >
+            <ref bean="newCustomer" />
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="customer" class="zhy2002.springexamples.domain.Customer" name="overriddenCustomer">
+        <property name="lastName" value="Overridden" />
+    </bean>
+
+    <bean id="shoppingCartA" class="zhy2002.springexamples.domain.ShoppingCart">
+        <property name="customer" ref="customer" />
+    </bean>
+
+    <bean id="userA" class="zhy2002.springexamples.domain.User" >
+        <constructor-arg ref="customer" />
+    </bean>
+
+    <bean id="counterBean" class="zhy2002.springexamples.common.InitCounterBean" />
+</beans>

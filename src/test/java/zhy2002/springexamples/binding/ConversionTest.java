@@ -1,5 +1,6 @@
 package zhy2002.springexamples.binding;
 
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,6 +9,7 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.testng.annotations.Test;
 import zhy2002.springexamples.common.DefaultConversionSpringConfig;
 import zhy2002.springexamples.common.EmptyStringConfig;
+import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.Product;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.ShoppingCartItem;
@@ -174,5 +176,44 @@ public class ConversionTest {
         //assertion
         assertThat(orderDetails.getOrderDate(), equalTo(dateFormat.parse("2013-12-05")));
 
+    }
+
+    @Test
+    public void canConvertProperties(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/conversion.xml");
+
+        //action
+        PropertyTestObject testObject = applicationContext.getBean(PropertyTestObject.class);
+
+        //assertion
+        assertThat(testObject.getConfigProperties().getProperty("prop1"), equalTo("test1"));
+        assertThat(testObject.getConfigProperties().getProperty("prop2.text"), equalTo("test2"));
+    }
+
+    @Test(expectedExceptions = BeanCreationException.class)
+    public void idRefIsChecked(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/idref.xml");
+
+        //action
+
+
+        //assertion
+    }
+
+    @Test()
+    public void idRefIsFulfilled(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("conversiontest/idref.xml", "conversiontest/nonExistentBean.xml");
+
+        //action
+        PropertyTestObject testObject = applicationContext.getBean(PropertyTestObject.class);
+
+        //assertion
+        assertThat(testObject.getBeanId(), equalTo("nonExistentBean"));
     }
 }

@@ -9,6 +9,10 @@ public class Customer {
     private String lastName;
     private Boolean vip;
 
+    public Customer(){
+        System.out.println("Creating customer...");
+    }
+
     public Long getId() {
         return id;
     }
@@ -39,5 +43,15 @@ public class Customer {
 
     public void setVip(Boolean vip) {
         this.vip = vip;
+    }
+
+    public static class CustomerFactory{
+
+        public static Customer createNew(String firstName, String lastName){
+            Customer customer = new Customer();
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            return customer;
+        }
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+    <bean id="dateFactory" class="java.util.GregorianCalendar">
+        <constructor-arg value="2015"/>
+        <constructor-arg value="1"/>
+        <constructor-arg value="19"/>
+    </bean>
+
+    <bean id="lunarNewYear2015" factory-bean="dateFactory" factory-method="getTime" />
+</beans>
