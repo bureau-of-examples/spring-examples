@@ -35,7 +35,7 @@ public class MvcTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void test() throws Exception{
+    public void getActionShouldWork() throws Exception{
 
         //action
         ResultActions resultActions = mockMvc.perform(get("/hello/{name}", "Jane"));
@@ -44,5 +44,16 @@ public class MvcTest extends AbstractTestNGSpringContextTests {
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(model().attribute("name", "Jane"));
 
+    }
+
+    @Test
+    public void postActionShouldWork() throws Exception{
+
+        //action
+        ResultActions resultActions = mockMvc.perform(post("/accessSecret").param("username", "Ned").param("password", "Stark"));
+
+        //assertion
+        resultActions.andExpect(status().isOk());
+        resultActions.andExpect(model().attribute("secret", "Revealed"));
     }
 }
