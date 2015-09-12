@@ -1,4 +1,4 @@
-package zhy2002.springexamples.ioc.xml;
+package zhy2002.springexamples.ioccontainer.xml;
 
 import zhy2002.springexamples.domain.Customer;
 

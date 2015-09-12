@@ -10,7 +10,7 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	">
 
-    <bean class="zhy2002.springexamples.ioc.xml.SetterInjectionTestObject" >
+    <bean class="zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject" >
         <property name="customer"  ref="nonExistentBean"  />
     </bean>
 </beans>

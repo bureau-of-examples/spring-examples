@@ -10,7 +10,7 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	">
 
-    <context:component-scan base-package="zhy2002.springexamples.ioc.xml" />
+    <context:component-scan base-package="zhy2002.springexamples.ioccontainer.xml" />
 
     <bean id="requiredCustomer" class="zhy2002.springexamples.domain.Customer" />
 </beans>

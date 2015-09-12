@@ -1,4 +1,4 @@
-package zhy2002.springexamples.ioc;
+package zhy2002.springexamples.ioccontainer;
 
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -8,8 +8,8 @@ import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.Customer;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.User;
-import zhy2002.springexamples.ioc.xml.AutowiredTestObject;
-import zhy2002.springexamples.ioc.xml.SetterInjectionTestObject;
+import zhy2002.springexamples.ioccontainer.xml.AutowiredTestObject;
+import zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Test the behaviour of xml config.
  */
-public class XmlTest {
+public class XmlConfigTest {
 
     @Test
     public void importIsAlwaysRelative(){ //so do not use a leading '/' as this confuses IntelliJ.
@@ -28,7 +28,7 @@ public class XmlTest {
         //arrange
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/xmltest/importIsAlwaysRelative.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/xmlconfigtest/importIsAlwaysRelative.xml");
 
         //assertion
         assertThat(applicationContext.containsBean("shoppingCart2"), equalTo(true));
@@ -40,7 +40,7 @@ public class XmlTest {
         //arrange
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("/xmltest/multipleConfigAreCombinedIntoOneB.xml", "/xmltest/multipleConfigAreCombinedIntoOneA.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("/xmlconfigtest/multipleConfigAreCombinedIntoOneB.xml", "/xmlconfigtest/multipleConfigAreCombinedIntoOneA.xml");
         ShoppingCart cartA = applicationContext.getBean("shoppingCartA", ShoppingCart.class);
         ShoppingCart cartB = applicationContext.getBean("shoppingCartB", ShoppingCart.class);
 
@@ -56,7 +56,7 @@ public class XmlTest {
         InitCounterBean.reset(); //assume no concurrent access to this counter.
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/importIsAlwaysRelative.xml", "xmltest/overlappingImport.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/importIsAlwaysRelative.xml", "xmlconfigtest/overlappingImport.xml");
 
         //assertion
         assertThat(InitCounterBean.getInstanceCount(), equalTo(2));
@@ -81,7 +81,7 @@ public class XmlTest {
         InitCounterBean.reset();
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/overrideBeanA.xml", "xmltest/overrideBeanB.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/overrideBeanA.xml", "xmlconfigtest/overrideBeanB.xml");
 
         //assertion
         assertThat(InitCounterBean.getInstanceCount(), equalTo(1));
@@ -93,7 +93,7 @@ public class XmlTest {
         //arrange
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/overrideBeanA.xml", "xmltest/overrideBeanB.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/overrideBeanA.xml", "xmlconfigtest/overrideBeanB.xml");
         ShoppingCart shoppingCartA = applicationContext.getBean("shoppingCartA", ShoppingCart.class);
         ShoppingCart shoppingCartB = applicationContext.getBean("shoppingCartB", ShoppingCart.class);
         User userA = applicationContext.getBean("userA", User.class);
@@ -128,7 +128,7 @@ public class XmlTest {
         //arrange
 
         //action
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/overrideBeanA.xml", "xmltest/overrideBeanB.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/overrideBeanA.xml", "xmlconfigtest/overrideBeanB.xml");
         Customer customer = applicationContext.getBean("overriddenCustomer", Customer.class);
 
         //assert
@@ -139,7 +139,7 @@ public class XmlTest {
     public void instantiationByInnerFactoryClass(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/instantiation.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/instantiation.xml");
 
         //action
         Customer customer = (Customer)applicationContext.getBean("customer");
@@ -153,7 +153,7 @@ public class XmlTest {
     public void canUseInstanceFactory(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/canUseInstanceFactory.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/canUseInstanceFactory.xml");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         //action
@@ -167,7 +167,7 @@ public class XmlTest {
     public void autowiredCanBeOptional(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/compoentScanIocXmlPackage.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/compoentScanIocXmlPackage.xml");
 
         //action
         AutowiredTestObject testObject = applicationContext.getBean("testObject1", AutowiredTestObject.class);
@@ -175,16 +175,16 @@ public class XmlTest {
         //assertion
         assertThat(testObject, notNullValue());
         assertThat(testObject.getOptionalCustomer(), nullValue());
-        assertThat(testObject.getRequiredCustomer(), notNullValue()); //dependency must be present otherwise: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'autowiredTestObject': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private zhy2002.springexamples.domain.Customer zhy2002.springexamples.ioc.xml.AutowiredTestObject.requiredCustomer; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [zhy2002.springexamples.domain.Customer] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+        assertThat(testObject.getRequiredCustomer(), notNullValue()); //dependency must be present otherwise: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'autowiredTestObject': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private zhy2002.springexamples.domain.Customer zhy2002.springexamples.ioccontainer.xml.AutowiredTestObject.requiredCustomer; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [zhy2002.springexamples.domain.Customer] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
 
     }
 
-    //org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'zhy2002.springexamples.ioc.xml.SetterInjectionTestObject#0' defined in class path resource [xmltest/setterInjectionIsOptional.xml]: Cannot resolve reference to bean 'nonExistentBean' while setting bean property 'customer'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'nonExistentBean' is defined
+    //org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject#0' defined in class path resource [xmlconfigtest/setterInjectionIsOptional.xml]: Cannot resolve reference to bean 'nonExistentBean' while setting bean property 'customer'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'nonExistentBean' is defined
     @Test(expectedExceptions = BeanCreationException.class)
     public void setterInjectionIsOptional(){ //while setter injection itself is optional, if it is declared in XML config it must be fulfilled.
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/setterInjectionRefBeanMustExist.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/setterInjectionRefBeanMustExist.xml");
 
         //action
         SetterInjectionTestObject testObject = applicationContext.getBean(SetterInjectionTestObject.class);
@@ -198,7 +198,7 @@ public class XmlTest {
     public void setterInjectionCanHaveCircularReference(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/setterInjectionCanHaveCircularReference.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/setterInjectionCanHaveCircularReference.xml");
 
         //action
         SetterInjectionTestObject testObject1 = applicationContext.getBean("testObject1", SetterInjectionTestObject.class);
@@ -215,8 +215,8 @@ public class XmlTest {
     public void canReferenceToBeanOfSameIdInParentContext(){
 
         //arrange
-        ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext("xmltest/parentContext.xml");
-        ClassPathXmlApplicationContext childContext = new ClassPathXmlApplicationContext(new String[]{"xmltest/childContextA.xml"}, parentContext);
+        ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext("xmlconfigtest/parentContext.xml");
+        ClassPathXmlApplicationContext childContext = new ClassPathXmlApplicationContext(new String[]{"xmlconfigtest/childContextA.xml"}, parentContext);
 
         //action
         ShoppingCart parentCart = childContext.getBean("cartOfParentCustomer", ShoppingCart.class);
@@ -234,7 +234,7 @@ public class XmlTest {
     public void canMergeWithParentCollection(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/mergeWithParent.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/mergeWithParent.xml");
 
         //action
         PropertyTestObject childObject = applicationContext.getBean(PropertyTestObject.class);
@@ -251,7 +251,7 @@ public class XmlTest {
     public void pNamespaceCanReferenceBean(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/pNamespaceCanReferenceBean.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/pNamespaceCanReferenceBean.xml");
 
         //action
         Customer customer = applicationContext.getBean(Customer.class);
@@ -266,7 +266,7 @@ public class XmlTest {
     public void cNamespaceCanReferenceBean(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/cNamespaceCanReferenceBean.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/cNamespaceCanReferenceBean.xml");
 
         //action
         Customer customer = applicationContext.getBean(Customer.class);
@@ -281,7 +281,7 @@ public class XmlTest {
     public void useCompoundPropertyName(){
 
         //arrange
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmltest/useCompoundPropertyName.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/useCompoundPropertyName.xml");
 
         //action
         PropertyTestObject testObject = applicationContext.getBean(PropertyTestObject.class);
