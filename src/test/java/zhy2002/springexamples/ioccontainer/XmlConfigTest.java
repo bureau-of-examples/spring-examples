@@ -11,6 +11,7 @@ import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.User;
 import zhy2002.springexamples.ioccontainer.xml.AutowireTestObject;
 import zhy2002.springexamples.ioccontainer.xml.AutowiredTestObject;
+import zhy2002.springexamples.ioccontainer.xml.LookupMethodTestObject;
 import zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject;
 
 import java.text.SimpleDateFormat;
@@ -405,10 +406,53 @@ public class XmlConfigTest {
 
     }
 
+    @Test
+    public void canInjectLookupMethod(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/lookupMethod.xml");
+
+        //action
+        LookupMethodTestObject testObject = applicationContext.getBean(LookupMethodTestObject.class);
+        ShoppingCart cart1 = testObject.createCart();
+        ShoppingCart cart2 = testObject.createCart();
+
+        //assertion
+        assertThat(cart1.getCustomer().getLastName(), equalTo("Prototype"));
+        assertThat(cart2.getCustomer().getLastName(), equalTo("Prototype"));
+        assertThat(cart1.getCustomer(), not(sameInstance(cart2.getCustomer())));
+    }
+
+    /**
+     * Can replace any method in Spring but prefer AspectJ.
+     */
+    @Test
+    public void canReplaceMethod(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/replaceMethod.xml");
+
+        //action
+        LookupMethodTestObject testObject1 = applicationContext.getBean("originalTestObject", LookupMethodTestObject.class);
+        LookupMethodTestObject testObject2 = applicationContext.getBean("replacedTestObject", LookupMethodTestObject.class);
+
+        //assertion
+        ShoppingCart cart1 = testObject1.createCart("Test1");
+        ShoppingCart cart2 = testObject2.createCart("Test2");
+        ShoppingCart cart2a = testObject2.createCart("Test2");
+        assertThat(cart1.getDateCreated(), nullValue());
+        assertThat(cart1.getCustomer().getLastName(), equalTo("Prototype"));
+        assertThat(cart2.getDateCreated(), notNullValue());
+        assertThat(cart2.getCustomer().getLastName(), nullValue());
+        assertThat(cart2.getCustomer(), not(sameInstance(cart2a.getCustomer())));
+
+
+    }
 
 
 
-    //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-dependson
+
+    //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-scopes
 
 
 
