@@ -4,14 +4,17 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 import zhy2002.springexamples.common.InitCounterBean;
+import zhy2002.springexamples.common.LazyTestObject;
 import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.Customer;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.User;
+import zhy2002.springexamples.ioccontainer.xml.AutowireTestObject;
 import zhy2002.springexamples.ioccontainer.xml.AutowiredTestObject;
 import zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -291,6 +294,118 @@ public class XmlConfigTest {
         assertThat(testObject.getNestedTestObject().getBeanId(), equalTo("testObject"));
 
     }
+
+    @Test
+    public void lazyInitBeanIsInitiatedWhenFirstNeeded(){
+
+        //arrange
+        LazyTestObject.setLogs(new ArrayList<>());
+
+        //action
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/lazyInit.xml");
+
+        //assertion
+        assertThat(LazyTestObject.getLogs(), hasSize(2));
+
+        //action
+        boolean hasLazy2 = applicationContext.containsBean("lazy2");  //check containsBean will not load the bean
+
+        //assertion
+        assertThat(hasLazy2, equalTo(true));
+        assertThat(LazyTestObject.getLogs(), hasSize(2));
+
+        //action
+        LazyTestObject lazy2 = (LazyTestObject)applicationContext.getBean("lazy2");
+
+        //assertion
+        assertThat(lazy2, notNullValue());
+        assertThat(LazyTestObject.getLogs(), hasSize(3));
+    }
+
+    /**
+     * Ok to autowire when there is only one viable Constructor.
+     * http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-autowire
+     */
+    @Test
+    public void autowireByConstructorWillPickTheOnlyViableConstructor(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/onlyOneViableAutowireConstructor.xml");
+
+        //action
+        AutowireTestObject testObject = applicationContext.getBean(AutowireTestObject.class);
+
+        //assertion
+        assertThat(testObject.getCustomer(), notNullValue());
+
+    }
+
+    /**
+     * Ok to autowire when there are two viable Constructors when one is more specific than the other.
+     */
+    @Test
+    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor.xml");
+
+        //action
+        AutowireTestObject testObject = applicationContext.getBean(AutowireTestObject.class);
+
+        //assertion
+        assertThat(testObject.getCustomer(), notNullValue());
+        assertThat(testObject.getShoppingCart(), notNullValue());
+    }
+
+    /**
+     * Ok to autowire when there are two viable Constructors but one has more parameters.
+     */
+    @Test
+    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters2(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor2.xml");
+
+        //action
+        AutowireTestObject testObject = applicationContext.getBean(AutowireTestObject.class);
+
+        //assertion
+        assertThat(testObject.getCustomer(), nullValue());
+        assertThat(testObject.getProduct(), notNullValue());
+        assertThat(testObject.getShoppingCart(), notNullValue());
+    }
+
+
+    /**
+     * It seems if two viable constructor has the same number of parameters, the one defined latter wins.
+     */
+    @Test
+    public void autowireByConstructorTwoViableConstructorsWithSameNumberOfParametersWillUseTheOneDefinedLater(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor3.xml");
+
+        //action
+        AutowireTestObject testObject = applicationContext.getBean(AutowireTestObject.class);
+
+        //assertion
+        assertThat(testObject.getCustomer(), notNullValue());
+        assertThat(testObject.getProduct(), nullValue());
+    }
+
+    @Test
+    public void autowireByNameIsOptional(){
+
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/autowireByName.xml");
+
+        //action
+        AutowireTestObject testObject = applicationContext.getBean(AutowireTestObject.class);
+
+        //assertion
+        assertThat(testObject.getCustomer(), notNullValue());
+        assertThat(testObject.getShoppingCart(), notNullValue());
+        assertThat(testObject.getProduct(), nullValue());
+
+    }
+
+
 
 
     //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-dependson
