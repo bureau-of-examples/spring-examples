@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import zhy2002.springexamples.domain.Article;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -55,5 +56,62 @@ public class MvcTest extends AbstractTestNGSpringContextTests {
         //assertion
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(model().attribute("secret", "Revealed"));
+    }
+
+
+    @Test
+    public void canFindViewInFolder() throws Exception{
+
+        //arrange
+
+        //action
+        ResultActions resultActions = mockMvc.perform(get("/articles/{id}", 5L));
+
+        //assertion
+        resultActions.andExpect(status().isOk());
+        resultActions.andExpect(model().attribute("id", 5L));
+        resultActions.andExpect(view().name("articles/readArticle"));
+    }
+
+    @Test
+    public void canMatchMoreSpecificUrl() throws Exception {
+
+        //action
+        ResultActions resultActions = mockMvc.perform(get("/articles/edit/{id}", 5L));
+
+        //assertion
+        resultActions.andExpect(status().isOk());
+        resultActions.andExpect(model().attribute("id", 5L));
+        resultActions.andExpect(view().name("articles/editArticle"));
+    }
+
+    @Test
+    public void canAccessStaticResources() throws Exception{
+
+        //action
+        ResultActions resultActions = mockMvc.perform(get("/css/layout.css"));
+
+        //assertion
+        resultActions.andExpect(status().isOk());
+    }
+
+    @Test
+    public void cannotPostToGetArticle() throws Exception{
+        //action
+        ResultActions resultActions = mockMvc.perform(post("/articles/{id}", 5L));
+
+        //assertion
+        resultActions.andExpect(status().is(405));
+    }
+
+    @Test
+    public void canRedirect() throws Exception{
+
+        //action
+        ResultActions resultActions = mockMvc.perform(post("/articles/save").param("title","A new entry").param("content","Something I wrote"));
+
+        //assertion
+        resultActions.andExpect(redirectedUrl("999"));
+        resultActions.andExpect(model().attribute("article", hasProperty("title", equalTo("A new entry"))));
     }
 }

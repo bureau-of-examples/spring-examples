@@ -16,6 +16,9 @@
 
     <mvc:annotation-driven enable-matrix-variables="true" />
 
+    <!--the mapping path is affected by the servlet path used send request to dispatcher servlet. that part should be deducted from mapping path-->
+    <mvc:resources mapping="/css/**" location="/css/" />
+
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />
