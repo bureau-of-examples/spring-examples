@@ -3,8 +3,11 @@ package zhy2002.springexamples.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import zhy2002.springexamples.common.StringUtils;
 import zhy2002.springexamples.domain.*;
+
+import java.io.IOException;
 
 /**
  * A test controller.
@@ -59,5 +62,11 @@ public class HelloController {
     public @ResponseBody String echoMatrixVarible(@PathVariable("name") String name, @MatrixVariable("times") int times){
 
         return StringUtils.repeat(name, times, ",");
+    }
+
+    @RequestMapping(value = "/hello/fileupload", method = RequestMethod.POST)
+    public @ResponseBody String saveFile(@RequestParam("id") Integer id, @RequestParam("file") MultipartFile file) throws IOException{
+
+        return "Saved " + file.getBytes().length + " bytes to category " + id;
     }
 }

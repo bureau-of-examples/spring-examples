@@ -1,6 +1,7 @@
 package zhy2002.springexamples.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -8,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -149,6 +151,20 @@ public class MvcXmlTest extends AbstractTestNGSpringContextTests {
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(model().attribute("id", 5L));
         resultActions.andExpect(view().name("articles/readArticle"));
+    }
+
+    @Test
+    public void canUploadFile() throws Exception{
+
+        //arrange
+        MockMultipartFile file = new MockMultipartFile("file", new byte[0]);
+
+        //action
+        ResultActions resultActions = mockMvc.perform(fileUpload("/hello/fileupload").file(file).param("id", "5"));
+
+        //assertion
+        resultActions.andExpect(status().isOk());
+        Assert.assertEquals(resultActions.andReturn().getResponse().getContentAsString(), "Saved 0 bytes to category 5");
     }
 
     @Test
