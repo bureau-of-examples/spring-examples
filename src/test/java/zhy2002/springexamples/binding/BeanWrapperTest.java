@@ -10,6 +10,7 @@ import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.*;
 
 import java.awt.*;
+import java.awt.Color;
 import java.beans.*;
 import java.math.BigDecimal;
 import java.text.ParseException;

@@ -18,4 +18,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         logger.info("Saving a ShoppingCart object...");
 
     }
+
+
+    public Integer itemInCart(Long cartId){
+
+        return (int)(cartId % 5);
+    }
 }

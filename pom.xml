@@ -156,6 +156,14 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!--enable mvc support for json
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>-->
+
+
 
     </dependencies>
 

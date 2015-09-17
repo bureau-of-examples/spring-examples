@@ -22,9 +22,18 @@ public class ShoppingCart {
         this.customer = customer;
     }
 
+    private Long id;
     private Date dateCreated;
     private Customer customer;
     private List<ShoppingCartItem> items = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Customer getCustomer() {
         return customer;

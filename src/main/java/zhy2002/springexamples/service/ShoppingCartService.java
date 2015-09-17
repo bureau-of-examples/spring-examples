@@ -5,6 +5,7 @@ import zhy2002.springexamples.domain.ShoppingCart;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Shopping cart related business logic.
@@ -13,4 +14,6 @@ import javax.validation.constraints.NotNull;
 public interface ShoppingCartService {
 
     void save(@Valid @NotNull ShoppingCart cart);
+
+    Integer itemInCart(Long cartId);
 }
