@@ -446,7 +446,16 @@ public class XmlConfigTest {
         assertThat(cart2.getCustomer().getLastName(), nullValue());
         assertThat(cart2.getCustomer(), not(sameInstance(cart2a.getCustomer())));
 
+    }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    public void beanPropertyMightNotBeSetWhenInjected(){
+        //arrange
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/postConstructTest.xml");
+        ArrayList<String> list = (ArrayList<String> )applicationContext.getBean("list");
+
+        assertThat(list.contains("other: null"), equalTo(true));
     }
 
 
