@@ -9,10 +9,7 @@ import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.Customer;
 import zhy2002.springexamples.domain.ShoppingCart;
 import zhy2002.springexamples.domain.User;
-import zhy2002.springexamples.ioccontainer.xml.AutowireTestObject;
-import zhy2002.springexamples.ioccontainer.xml.AutowiredTestObject;
-import zhy2002.springexamples.ioccontainer.xml.LookupMethodTestObject;
-import zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject;
+import zhy2002.springexamples.ioccontainer.xml.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -459,6 +456,26 @@ public class XmlConfigTest {
     }
 
 
+    @Test
+    public void requiredPropertyInjectionCheckIsNotEnabledByDefault(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionTest.xml");
+        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        assertThat(testObject.getRequiredProperty(), nullValue());
+    }
+
+    @Test(expectedExceptions = BeanCreationException.class)
+    public void requiredPropertyInjectionCheckIsEnforcedByBPP(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionFailTest.xml");
+        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        assertThat(testObject.getRequiredProperty(), nullValue());
+    }
+
+    @Test
+    public void requiredPropertyInjectionCanStillBeNull(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionPassTest.xml");
+        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        assertThat(testObject.getRequiredProperty(), nullValue());
+    }
 
 
     //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-scopes
