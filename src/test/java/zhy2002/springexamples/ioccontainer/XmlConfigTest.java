@@ -3,6 +3,8 @@ package zhy2002.springexamples.ioccontainer;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
+import zhy2002.springexamples.beans.package1.Bean1;
+import zhy2002.springexamples.beans.package2.Bean2;
 import zhy2002.springexamples.common.InitCounterBean;
 import zhy2002.springexamples.common.LazyTestObject;
 import zhy2002.springexamples.common.PropertyTestObject;
@@ -230,6 +232,17 @@ public class XmlConfigTest {
         assertThat(newCart.getCustomer().getLastName(), equalTo("New Customer In Parent Context")); //if a bean is not present in the child context, it is searched in the parent context.
 
     }
+
+    @Test
+    public void beanPostProcessorInParentContextIsNotRegisteredInChildContext(){
+        ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext("xmlconfigtest/beanPostProcessorParentContext.xml");
+        ClassPathXmlApplicationContext childContext = new ClassPathXmlApplicationContext(new String[]{"xmlconfigtest/beanPostProcessorChildContext.xml"}, parentContext);
+        int childPostProcessCount = childContext.getBeanFactory().getBeanPostProcessorCount();
+        int parentPostProcessorCount = parentContext.getBeanFactory().getBeanPostProcessorCount();
+        assertThat(parentPostProcessorCount, greaterThan(childPostProcessCount));
+    }
+
+
 
     @Test
     public void canMergeWithParentCollection(){
@@ -476,6 +489,25 @@ public class XmlConfigTest {
         RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
         assertThat(testObject.getRequiredProperty(), nullValue());
     }
+
+    @Test(expectedExceptions = BeanCreationException.class)
+    public void beanValidationPostProcessorValidatesBeanAfterPropertiesSet(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/beanValidationPostProcessorTest.xml");
+        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        assertThat(testObject.getRequiredProperty(), nullValue());
+    }
+
+    @Test
+    public void multipleComponentScansAreCombined(){
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/multipleComponentScans.xml");
+        Bean1 bean1 = applicationContext.getBean(Bean1.class);
+        assertThat(bean1, notNullValue());
+
+        Bean2 bean2 = applicationContext.getBean(Bean2.class);
+        assertThat(bean2, notNullValue());
+    }
+
+
 
 
     //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-scopes

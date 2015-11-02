@@ -3,6 +3,8 @@ package zhy2002.springexamples.ioccontainer.xml;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Test the at Required annotation.
  */
@@ -19,6 +21,7 @@ public class RequiredTestObject {
         this.optionalProperty = optionalProperty;
     }
 
+    @NotNull
     public String getRequiredProperty() {
         return requiredProperty;
     }
