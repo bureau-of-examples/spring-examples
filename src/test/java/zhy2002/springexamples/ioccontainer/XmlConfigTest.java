@@ -7,6 +7,7 @@ import zhy2002.springexamples.beans.package1.Bean1;
 import zhy2002.springexamples.beans.package2.Bean2;
 import zhy2002.springexamples.common.InitCounterBean;
 import zhy2002.springexamples.common.LazyTestObject;
+import zhy2002.springexamples.common.MyTestService;
 import zhy2002.springexamples.common.PropertyTestObject;
 import zhy2002.springexamples.domain.Customer;
 import zhy2002.springexamples.domain.ShoppingCart;
@@ -505,6 +506,34 @@ public class XmlConfigTest {
 
         Bean2 bean2 = applicationContext.getBean(Bean2.class);
         assertThat(bean2, notNullValue());
+    }
+
+    @Test
+    public void canRegisterThreadScopeBean() throws Exception{
+
+        final int[] hashCodes = new int[4];
+        final ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/simpleThreadScope.xml");
+
+        Thread thread1 = new Thread(()->{
+            MyTestService testService = applicationContext.getBean(MyTestService.class);
+            hashCodes[0] = testService.getIdentityHashCode();
+            testService = applicationContext.getBean(MyTestService.class);
+            hashCodes[1] = testService.getIdentityHashCode();
+        });
+        Thread thread2 = new Thread(()->{
+            MyTestService testService = applicationContext.getBean(MyTestService.class);
+            hashCodes[2] = testService.getIdentityHashCode();
+            testService = applicationContext.getBean(MyTestService.class);
+            hashCodes[3] = testService.getIdentityHashCode();
+        });
+
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+        assertThat(hashCodes[0], equalTo(hashCodes[1]));
+        assertThat(hashCodes[2], equalTo(hashCodes[3]));
+        assertThat(hashCodes[0], not(equalTo(hashCodes[2])));
     }
 
 
