@@ -148,61 +148,10 @@ public class Program {
     }
 
 
-    public static boolean isIsomorphic(String s, String t) {
-        HashMap<Character, Character> map = new HashMap<>();
 
-        for (int i = 0; i < s.length(); i++) {
-            char ch1 = s.charAt(i);
-            char ch2 = t.charAt(i);
 
-            if (!map.containsKey(ch1)) {
-                if (map.containsValue(ch2))
-                    return false;
 
-                map.put(ch1, ch2);
-            } else {
-                if (map.get(ch1) != ch2)
-                    return false;
-            }
 
-        }
-        return true;
-    }
-
-    public static int rangeBitwiseAnd(int m, int n) {
-
-        int trailing0s = 0;
-        int mask = 0;
-
-        while (m > 0 && n > (m | mask)) {
-            m &= ~(1 << trailing0s);
-            trailing0s++;
-            mask <<= 1;
-            mask |= 1;
-        }
-        return m;
-
-    }
-
-    public static boolean isHappy(int n) {
-
-        HashSet<Integer> calculated = new HashSet<>();
-        while (true) {
-            if (n == 1)
-                return true;
-            calculated.add(n);
-            char[] digits = String.valueOf(n).toCharArray();
-            int next = 0;
-            for (char digit : digits) {
-                int d = digit - '0';
-                next += d * d;
-            }
-            if (calculated.contains(next))
-                return false;
-
-            n = next;
-        }
-    }
 
     private static void testSpEL() {
         ExpressionParser expressionParser = new SpelExpressionParser();
