@@ -20,7 +20,7 @@ public class JmsTest {
         BrokerService brokerService = new BrokerService();
 
         // configure the broker
-        brokerService.addConnector("tcp://localhost:33333");
+        brokerService.addConnector("tcp://localhost:30333");
         brokerService.setBrokerName(TEST_BROKER_NAME);
         brokerService.start();
         return brokerService;

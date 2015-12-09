@@ -18,7 +18,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import java.math.BigDecimal;
-import java.sql.SQLSyntaxErrorException;
 import java.util.Date;
 import java.util.Set;
 
