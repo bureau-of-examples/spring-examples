@@ -7,7 +7,7 @@
 
     <import resource="common.xml" />
 
-    <bean class="zhy2002.springexamples.jms.MqStarterBean" />
+    <!--<bean class="zhy2002.springexamples.jms.MqStarterBean" />-->
 
     <bean id="jmsRemoteService" class="org.springframework.jms.remoting.JmsInvokerProxyFactoryBean">
         <property name="serviceInterface" value="zhy2002.springexamples.jms.JmsRemoteService"/>

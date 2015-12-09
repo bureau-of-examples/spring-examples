@@ -13,18 +13,12 @@ import static org.hamcrest.Matchers.instanceOf;
 
 public class JmsTest {
 
-    private static final String TEST_BROKER_NAME = "testBroker";
-    private static final String TEST_QUEUE_NAME = "testQueue";
-
-    private BrokerService createBroker() throws Exception{
-        BrokerService brokerService = new BrokerService();
-
-        // configure the broker
-        brokerService.addConnector("tcp://localhost:30333");
-        brokerService.setBrokerName(TEST_BROKER_NAME);
-        brokerService.start();
-        return brokerService;
+    static {
+        MqStarterBean.getSingleton();
     }
+
+    public static final String TEST_BROKER_NAME = "testBroker";
+    private static final String TEST_QUEUE_NAME = "testQueue";
 
     private void simpleSessionTemplate(ThrowingConsumer<Session> jmsTask) throws Exception{
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://" + TEST_BROKER_NAME);
@@ -74,8 +68,6 @@ public class JmsTest {
     @Test
     public void canProduceAndConsumeMessage() throws Exception {
 
-        BrokerService brokerService = createBroker();
-
         String testText = "Hello test message 123";
         produceTextMessage(testText);
 
@@ -84,7 +76,22 @@ public class JmsTest {
 
         TextMessage textMessage = (TextMessage) message;
         assertThat(textMessage.getText(), equalTo(testText));
-        brokerService.stop();
 
+    }
+
+    @Test
+    public void test(){
+
+        printPermutation("", "cat");
+    }
+
+    private void printPermutation(String prefix, String rest) {
+        if(rest.length() == 0){
+            System.out.println(prefix);
+        }
+
+        for(int i=0; i<rest.length(); i++){
+            printPermutation(prefix + rest.charAt(i), rest.substring(0, i) + rest.substring(i+1));
+        }
     }
 }

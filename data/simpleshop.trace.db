@@ -201,3 +201,42 @@ update customers set name = 'aaaaa' where id = 1 [42122-185]
 	at org.testng.TestNG.run(TestNG.java:999)
 	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
 	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:122)
+12-10 09:53:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 09:55:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 09:57:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:00:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:01:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:06:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:08:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:10:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:11:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:12:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:19:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:22:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 10:24:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]

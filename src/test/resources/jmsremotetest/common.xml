@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://localhost:30333"/>
+        <property name="brokerURL" value="tcp://localhost:33333"/>
     </bean>
 
     <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">

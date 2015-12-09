@@ -8,21 +8,29 @@ import javax.annotation.PreDestroy;
 /**
  * Start a mq broker service.
  */
-public class MqStarterBean implements Ordered {
+public class MqStarterBean {
+
+    private static final MqStarterBean singleton;
+
+    static {
+        singleton = new MqStarterBean(33333);
+    }
+
+    public static MqStarterBean getSingleton(){
+        return singleton;
+    }
 
     private BrokerService brokerService;
 
-    public MqStarterBean(){
-        this(30333);
-    }
-
-    public MqStarterBean(int port) {
+    private MqStarterBean(int port) {
 
         try {
             brokerService = new BrokerService();
 
             // configure the broker
             brokerService.addConnector("tcp://localhost:" + port);
+            brokerService.setUseJmx(false);
+            brokerService.setBrokerName(JmsTest.TEST_BROKER_NAME);
             brokerService.start();
         }catch (Exception ex){
             throw new RuntimeException(ex);
@@ -39,8 +47,4 @@ public class MqStarterBean implements Ordered {
         }
     }
 
-    @Override
-    public int getOrder() {
-        return 0;
-    }
 }

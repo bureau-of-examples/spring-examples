@@ -14,7 +14,7 @@ public class JmsTemplateTestConfig {
 
     @Bean
     public ConnectionFactory getConnectionFactory() throws Exception {
-        return new ActiveMQConnectionFactory("tcp://localhost:30333");
+        return new ActiveMQConnectionFactory("tcp://localhost:33333");
     }
 
     @Bean
@@ -22,9 +22,8 @@ public class JmsTemplateTestConfig {
         return new ActiveMQQueue("cbis-request");
     }
 
-    @Bean
-    public MqStarterBean getMqStarterBean(){
-       return new MqStarterBean(30333);
-    }
-
+//    @Bean
+//    public MqStarterBean getMqStarterBean(){
+//       return new MqStarterBean(30335);
+//    }
 }
