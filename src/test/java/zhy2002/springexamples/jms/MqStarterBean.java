@@ -12,13 +12,17 @@ public class MqStarterBean implements Ordered {
 
     private BrokerService brokerService;
 
-    public MqStarterBean() {
+    public MqStarterBean(){
+        this(30333);
+    }
+
+    public MqStarterBean(int port) {
 
         try {
             brokerService = new BrokerService();
 
             // configure the broker
-            brokerService.addConnector("tcp://localhost:30333");
+            brokerService.addConnector("tcp://localhost:" + port);
             brokerService.start();
         }catch (Exception ex){
             throw new RuntimeException(ex);
