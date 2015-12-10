@@ -11,10 +11,14 @@ import javax.jms.Destination;
 
 public class JmsTransactionalServiceImpl implements JmsTransactionalService {
 
+
+    public JmsTransactionalServiceImpl(Destination destination){
+        this.destination = destination;
+    }
+
     @Autowired
     private ConnectionFactory connectionFactory;
 
-    @Resource(name = "myDestination")
     private Destination destination;
 
     @Transactional(transactionManager = "jmsTransactionManager")
@@ -25,13 +29,14 @@ public class JmsTransactionalServiceImpl implements JmsTransactionalService {
         throw new RuntimeException(message);
     }
 
+    @Transactional(transactionManager = "jmsTransactionManager")
     public Object receive(){
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
-        jmsTemplate.setReceiveTimeout(1);
+        jmsTemplate.setReceiveTimeout(100);
         return jmsTemplate.receiveAndConvert(destination);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "jmsTransactionManager")
     public void send(String message){
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
         jmsTemplate.convertAndSend(destination, message);

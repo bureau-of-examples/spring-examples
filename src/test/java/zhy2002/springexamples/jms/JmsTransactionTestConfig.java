@@ -30,7 +30,7 @@ public class JmsTransactionTestConfig extends JmsTemplateTestConfig{
 
     @Bean
     public JmsTransactionalService getJmsTransactionalService(){
-        return new JmsTransactionalServiceImpl();
+        return new JmsTransactionalServiceImpl(getMyDestination());
     }
 
 }

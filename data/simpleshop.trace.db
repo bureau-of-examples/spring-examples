@@ -240,3 +240,15 @@ select * from NonExistentTable [42102-185]
 12-10 10:24:28 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
 select * from NonExistentTable [42102-185]
+12-10 10:29:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 11:51:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 12:00:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
+12-10 12:08:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NONEXISTENTTABLE" not found; SQL statement:
+select * from NonExistentTable [42102-185]
