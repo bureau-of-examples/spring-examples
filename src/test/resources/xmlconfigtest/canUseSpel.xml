@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="person1" class="zhy2002.springexamples.Person" >
+        <property name="firstName" value="Adam" />
+        <property name="lastName" value="Smith" />
+    </bean>
+
+    <bean id="person2" class="zhy2002.springexamples.Person" >
+        <property name="firstName" value="#{person1.firstName}" />
+        <property name="lastName" value="#{'#' + '{test}'}" />
+    </bean>
+
+</beans>

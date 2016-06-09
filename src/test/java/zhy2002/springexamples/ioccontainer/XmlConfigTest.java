@@ -1,8 +1,10 @@
 package zhy2002.springexamples.ioccontainer;
 
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
+import zhy2002.springexamples.Person;
 import zhy2002.springexamples.beans.package1.Bean1;
 import zhy2002.springexamples.beans.package2.Bean2;
 import zhy2002.springexamples.common.InitCounterBean;
@@ -27,7 +29,7 @@ import static org.hamcrest.Matchers.*;
 public class XmlConfigTest {
 
     @Test
-    public void importIsAlwaysRelative(){ //so do not use a leading '/' as this confuses IntelliJ.
+    public void importIsAlwaysRelative() { //so do not use a leading '/' as this confuses IntelliJ.
 
         //arrange
 
@@ -39,7 +41,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void multipleConfigAreCombinedIntoOne(){
+    public void multipleConfigAreCombinedIntoOne() {
 
         //arrange
 
@@ -54,7 +56,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void crossImportResultInDoubleInitialization(){
+    public void crossImportResultInDoubleInitialization() {
 
         //arrange
         InitCounterBean.reset(); //assume no concurrent access to this counter.
@@ -79,7 +81,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void overriddenBeanIsNotInstantiated(){
+    public void overriddenBeanIsNotInstantiated() {
 
         //arrange
         InitCounterBean.reset();
@@ -92,7 +94,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void allInjectionWillUseOverridingBean(){
+    public void allInjectionWillUseOverridingBean() {
 
         //arrange
 
@@ -111,7 +113,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void canRegisterSingleton(){
+    public void canRegisterSingleton() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:na.xml");
@@ -127,7 +129,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void overriddenBeanIsNotAccessedViaName(){
+    public void overriddenBeanIsNotAccessedViaName() {
 
         //arrange
 
@@ -140,13 +142,13 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void instantiationByInnerFactoryClass(){
+    public void instantiationByInnerFactoryClass() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/instantiation.xml");
 
         //action
-        Customer customer = (Customer)applicationContext.getBean("customer");
+        Customer customer = (Customer) applicationContext.getBean("customer");
 
         //assertion
         assertThat(customer.getFirstName(), equalTo("Snow"));
@@ -154,21 +156,21 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void canUseInstanceFactory(){
+    public void canUseInstanceFactory() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/canUseInstanceFactory.xml");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         //action
-        Date newYear2015 = (Date)applicationContext.getBean("lunarNewYear2015");
+        Date newYear2015 = (Date) applicationContext.getBean("lunarNewYear2015");
 
         //assertion
         assertThat(dateFormat.format(newYear2015), equalTo("2015-02-19"));
     }
 
     @Test
-    public void autowiredCanBeOptional(){
+    public void autowiredCanBeOptional() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/compoentScanIocXmlPackage.xml");
@@ -185,7 +187,7 @@ public class XmlConfigTest {
 
     //org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'zhy2002.springexamples.ioccontainer.xml.SetterInjectionTestObject#0' defined in class path resource [xmlconfigtest/setterInjectionIsOptional.xml]: Cannot resolve reference to bean 'nonExistentBean' while setting bean property 'customer'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'nonExistentBean' is defined
     @Test(expectedExceptions = BeanCreationException.class)
-    public void setterInjectionIsOptional(){ //while setter injection itself is optional, if it is declared in XML config it must be fulfilled.
+    public void setterInjectionIsOptional() { //while setter injection itself is optional, if it is declared in XML config it must be fulfilled.
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/setterInjectionRefBeanMustExist.xml");
@@ -199,7 +201,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void setterInjectionCanHaveCircularReference(){
+    public void setterInjectionCanHaveCircularReference() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/setterInjectionCanHaveCircularReference.xml");
@@ -216,7 +218,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void canReferenceToBeanOfSameIdInParentContext(){
+    public void canReferenceToBeanOfSameIdInParentContext() {
 
         //arrange
         ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext("xmlconfigtest/parentContext.xml");
@@ -235,7 +237,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void beanPostProcessorInParentContextIsNotRegisteredInChildContext(){
+    public void beanPostProcessorInParentContextIsNotRegisteredInChildContext() {
         ClassPathXmlApplicationContext parentContext = new ClassPathXmlApplicationContext("xmlconfigtest/beanPostProcessorParentContext.xml");
         ClassPathXmlApplicationContext childContext = new ClassPathXmlApplicationContext(new String[]{"xmlconfigtest/beanPostProcessorChildContext.xml"}, parentContext);
         int childPostProcessCount = childContext.getBeanFactory().getBeanPostProcessorCount();
@@ -244,9 +246,8 @@ public class XmlConfigTest {
     }
 
 
-
     @Test
-    public void canMergeWithParentCollection(){
+    public void canMergeWithParentCollection() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/mergeWithParent.xml");
@@ -263,7 +264,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void pNamespaceCanReferenceBean(){
+    public void pNamespaceCanReferenceBean() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/pNamespaceCanReferenceBean.xml");
@@ -278,7 +279,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void cNamespaceCanReferenceBean(){
+    public void cNamespaceCanReferenceBean() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/cNamespaceCanReferenceBean.xml");
@@ -293,7 +294,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void useCompoundPropertyName(){
+    public void useCompoundPropertyName() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/useCompoundPropertyName.xml");
@@ -308,7 +309,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void lazyInitBeanIsInitiatedWhenFirstNeeded(){
+    public void lazyInitBeanIsInitiatedWhenFirstNeeded() {
 
         //arrange
         LazyTestObject.setLogs(new ArrayList<>());
@@ -327,7 +328,7 @@ public class XmlConfigTest {
         assertThat(LazyTestObject.getLogs(), hasSize(2));
 
         //action
-        LazyTestObject lazy2 = (LazyTestObject)applicationContext.getBean("lazy2");
+        LazyTestObject lazy2 = (LazyTestObject) applicationContext.getBean("lazy2");
 
         //assertion
         assertThat(lazy2, notNullValue());
@@ -339,7 +340,7 @@ public class XmlConfigTest {
      * http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-autowire
      */
     @Test
-    public void autowireByConstructorWillPickTheOnlyViableConstructor(){
+    public void autowireByConstructorWillPickTheOnlyViableConstructor() {
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/onlyOneViableAutowireConstructor.xml");
 
@@ -355,7 +356,7 @@ public class XmlConfigTest {
      * Ok to autowire when there are two viable Constructors when one is more specific than the other.
      */
     @Test
-    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters(){
+    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters() {
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor.xml");
 
@@ -371,7 +372,7 @@ public class XmlConfigTest {
      * Ok to autowire when there are two viable Constructors but one has more parameters.
      */
     @Test
-    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters2(){
+    public void autowireByConstructorTwoViableConstructorsWillPickTheOneWithMoreParameters2() {
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor2.xml");
 
@@ -389,7 +390,7 @@ public class XmlConfigTest {
      * It seems if two viable constructor has the same number of parameters, the one defined latter wins.
      */
     @Test
-    public void autowireByConstructorTwoViableConstructorsWithSameNumberOfParametersWillUseTheOneDefinedLater(){
+    public void autowireByConstructorTwoViableConstructorsWithSameNumberOfParametersWillUseTheOneDefinedLater() {
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/twoViableAutowireConstructor3.xml");
 
@@ -402,7 +403,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void autowireByNameIsOptional(){
+    public void autowireByNameIsOptional() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/autowireByName.xml");
@@ -418,7 +419,7 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void canInjectLookupMethod(){
+    public void canInjectLookupMethod() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/lookupMethod.xml");
@@ -438,7 +439,7 @@ public class XmlConfigTest {
      * Can replace any method in Spring but prefer AspectJ.
      */
     @Test
-    public void canReplaceMethod(){
+    public void canReplaceMethod() {
 
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/replaceMethod.xml");
@@ -461,45 +462,45 @@ public class XmlConfigTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void beanPropertyMightNotBeSetWhenInjected(){
+    public void beanPropertyMightNotBeSetWhenInjected() {
         //arrange
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/postConstructTest.xml");
-        ArrayList<String> list = (ArrayList<String> )applicationContext.getBean("list");
+        ArrayList<String> list = (ArrayList<String>) applicationContext.getBean("list");
 
         assertThat(list.contains("other: null"), equalTo(true));
     }
 
 
     @Test
-    public void requiredPropertyInjectionCheckIsNotEnabledByDefault(){
+    public void requiredPropertyInjectionCheckIsNotEnabledByDefault() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionTest.xml");
-        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        RequiredTestObject testObject = (RequiredTestObject) applicationContext.getBean("testObject");
         assertThat(testObject.getRequiredProperty(), nullValue());
     }
 
     @Test(expectedExceptions = BeanCreationException.class)
-    public void requiredPropertyInjectionCheckIsEnforcedByBPP(){
+    public void requiredPropertyInjectionCheckIsEnforcedByBPP() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionFailTest.xml");
-        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        RequiredTestObject testObject = (RequiredTestObject) applicationContext.getBean("testObject");
         assertThat(testObject.getRequiredProperty(), nullValue());
     }
 
     @Test
-    public void requiredPropertyInjectionCanStillBeNull(){
+    public void requiredPropertyInjectionCanStillBeNull() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/requiredPropertyInjectionPassTest.xml");
-        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        RequiredTestObject testObject = (RequiredTestObject) applicationContext.getBean("testObject");
         assertThat(testObject.getRequiredProperty(), nullValue());
     }
 
     @Test(expectedExceptions = BeanCreationException.class)
-    public void beanValidationPostProcessorValidatesBeanAfterPropertiesSet(){
+    public void beanValidationPostProcessorValidatesBeanAfterPropertiesSet() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/beanValidationPostProcessorTest.xml");
-        RequiredTestObject testObject = (RequiredTestObject)applicationContext.getBean("testObject");
+        RequiredTestObject testObject = (RequiredTestObject) applicationContext.getBean("testObject");
         assertThat(testObject.getRequiredProperty(), nullValue());
     }
 
     @Test
-    public void multipleComponentScansAreCombined(){
+    public void multipleComponentScansAreCombined() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/multipleComponentScans.xml");
         Bean1 bean1 = applicationContext.getBean(Bean1.class);
         assertThat(bean1, notNullValue());
@@ -509,18 +510,18 @@ public class XmlConfigTest {
     }
 
     @Test
-    public void canRegisterThreadScopeBean() throws Exception{
+    public void canRegisterThreadScopeBean() throws Exception {
 
         final int[] hashCodes = new int[4];
         final ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/simpleThreadScope.xml");
 
-        Thread thread1 = new Thread(()->{
+        Thread thread1 = new Thread(() -> {
             MyTestService testService = applicationContext.getBean(MyTestService.class);
             hashCodes[0] = testService.getIdentityHashCode();
             testService = applicationContext.getBean(MyTestService.class);
             hashCodes[1] = testService.getIdentityHashCode();
         });
-        Thread thread2 = new Thread(()->{
+        Thread thread2 = new Thread(() -> {
             MyTestService testService = applicationContext.getBean(MyTestService.class);
             hashCodes[2] = testService.getIdentityHashCode();
             testService = applicationContext.getBean(MyTestService.class);
@@ -536,11 +537,84 @@ public class XmlConfigTest {
         assertThat(hashCodes[0], not(equalTo(hashCodes[2])));
     }
 
+    @Test
+    public void canRegisterThreadScopeFactory() throws Exception {
+        final ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/threadScopeFactory.xml");
+        final Object signal = new Object();
 
+        Thread thread1 = new Thread(() -> {
+            final MyConfig myConfig1 = applicationContext.getBean("myConfig", MyConfig.class);
+            assertThat(myConfig1.getTheValue(), equalTo("initial"));
+
+            Thread thread2 = new Thread(() -> {
+                MyConfig myConfig2 = applicationContext.getBean("myConfig", MyConfig.class);
+                assertThat(myConfig2.getTheValue(), equalTo("initial"));
+
+                synchronized (signal) {
+                    signal.notifyAll();
+                    try {
+                        signal.wait();
+                    }catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
+                myConfig2 = applicationContext.getBean("myConfig", MyConfig.class);
+                assertThat(myConfig2.getTheValue(), equalTo("initial"));
+            });
+            thread2.start();
+
+            synchronized (signal) {
+                try {
+                    signal.wait();
+                }catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            myConfig1.setTheValue("initial2");
+            MyConfigFactory factory = applicationContext.getBean("myConfigFactory", MyConfigFactory.class);
+            factory.updateMyConfig(myConfig1);
+
+            synchronized (signal) {
+                signal.notifyAll();
+            }
+
+            try {
+                thread2.join();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+            Thread thread3 = new Thread(() -> {
+                MyConfig myConfig3 = applicationContext.getBean("myConfig", MyConfig.class);
+                assertThat(myConfig3.getTheValue(), equalTo("initial2"));
+
+            });
+            thread3.start();
+            try {
+                thread3.join();
+            }catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        thread1.start();
+        thread1.join();
+    }
+
+    @Test
+    public void canUseSpel() {
+
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("xmlconfigtest/canUseSpel.xml");
+        Person person2 = applicationContext.getBean("person2", Person.class);
+
+        assertThat(person2.getFirstName(), equalTo("Adam"));
+        assertThat(person2.getLastName(), equalTo("#{test}"));
+    }
 
 
     //todo parked here: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#beans-factory-scopes
-
 
 
 }
